@@ -1,4 +1,3 @@
-## v1.1.7
+## v1.1.8
 
-- Enhance module installation and safety checks
-- Better user prompts
+- Fixed a format bug where KernelSU-based managers wouldn't recognize the module
