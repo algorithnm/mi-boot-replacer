@@ -199,11 +199,11 @@ This module utilizes systemless mount to mount the files, ensuring no modificati
 
 1. Use the [GitHub Actions workflow](#github-actions-build-your-own-module) to build your custom module
 2. Download the built module from Artifacts
-3. Flash .zip module in the Magisk / KernelSU / APatch app
+3. Flash the downloaded ZIP directly
 4. Reboot
 
 > [!TIP]
-> If you get a blank screen after rebooting, it's likely because the ZIP file wasn't compressed correctly. Use "store-only" mode (no compression) when creating the ZIP.
+> Flash the downloaded artifact directly - no extraction needed! The workflow creates properly formatted module packages ready to flash.
 
 ## Backup and Restore
 
@@ -323,8 +323,8 @@ p 0 5 part0
 - Second number = pause after loop (in frames)
 - Path = folder containing the frames
 
-> [!IMPORTANT]
-> Bootanimation ZIP files **must** use STORE compression (no compression). The workflow handles this automatically.
+> [!NOTE]
+> The GitHub Actions workflow automatically creates properly formatted module ZIP files using standard compression.
 
 ## Disclaimer
 **A bootloop saver module is strongly advised even if there is little possibility that flashing this module would cause your device to bootloop. I am not responsible for any damages caused to your device or data by using this module. Use at your own risk.**
