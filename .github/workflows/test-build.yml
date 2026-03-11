@@ -2,6 +2,8 @@ name: Test Build
 
 # Automatically builds the module on push
 
+run-name: "Build Test Module #${{ github.run_number }}"
+
 on:
   push:
     branches:
