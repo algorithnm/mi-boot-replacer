@@ -211,7 +211,7 @@ fi
 if [ -d "$OLD_MODULE_DIR/system" ]; then
   ui_print "- Found existing module installation"
   ui_print "- Preserving current theme..."
-  # rm -rf "$MODPATH/system"
+   rm -rf "$MODPATH/system"
   cp -rf "$OLD_MODULE_DIR/system" "$MODPATH/system"
   if [ $? -eq 0 ]; then
     ui_print "- Current theme preserved successfully"
