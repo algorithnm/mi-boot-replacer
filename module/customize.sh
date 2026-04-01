@@ -48,41 +48,9 @@ key_check() {
   done
 }
 
-# Auto-detect boot animation directory from module structure
-detect_boot_dir() {
-  local module_boot_dir=""
-
-  # Search for bootanimation.zip in module's system directory
-  if [ -f "$MODPATH/system/product/media/bootanimation.zip" ]; then
-    module_boot_dir="/product/media"
-  elif [ -f "$MODPATH/system/media/bootanimation.zip" ]; then
-    module_boot_dir="/system/media"
-  elif [ -f "$MODPATH/system_ext/media/bootanimation.zip" ]; then
-    module_boot_dir="/system_ext/media"
-  fi
-
-  if [ -n "$module_boot_dir" ]; then
-    # Module has a pre-configured path from build
-    BOOT_DIR="$module_boot_dir"
-    BOOT_DIR_FROM_MODULE=true
-  else
-    # Fallback: detect from device's existing bootanimation
-    BOOT_DIR_FROM_MODULE=false
-    if [ -f "/product/media/bootanimation.zip" ]; then
-      BOOT_DIR="/product/media"
-    elif [ -f "/system/media/bootanimation.zip" ]; then
-      BOOT_DIR="/system/media"
-    elif [ -f "/system_ext/media/bootanimation.zip" ]; then
-      BOOT_DIR="/system_ext/media"
-    else
-      BOOT_DIR="/product/media"
-    fi
-  fi
-}
-
 # Let user select boot animation directory
 select_boot_dir() {
-  ui_print "- Select boot animation directory:"
+  ui_print "- Select boot animation path:"
   ui_print "- Press the following keys to proceed:"
   ui_print "  Volume [+]: Next option"
   ui_print "  Volume [-]: Confirm selection"
@@ -204,7 +172,7 @@ if [[ "$DEVICE_BRAND" != "xiaomi" && "$DEVICE_BRAND" != "redmi" && "$DEVICE_BRAN
   ui_print "! Warning: Non-Xiaomi device detected"
   ui_print "- This module is designed for Xiaomi/Redmi/POCO devices"
   ui_print "- Theoretically it should still work, but keep in mind that unexpected behaviour may occur"
-  ui_print "- If you think this is a mistake, please make sure you do not have any device spoofing related module enabled"
+  ui_print "- If you think this is a mistake, please make sure you do not have any device spoofing related module"
   ui_print "- Do you want to proceed with installation?"
   ui_print "  Volume [+]: Continue (At your own risk)"
   ui_print "  Volume [-]: Abort installation"
@@ -241,8 +209,7 @@ fi
 if [ -d "$OLD_MODULE_DIR/system" ]; then
   ui_print "- Found existing module installation"
   ui_print "- Preserving current theme..."
-  # Remove the new module's system directory and copy the old one
-  rm -rf "$MODPATH/system"
+  # rm -rf "$MODPATH/system"
   cp -rf "$OLD_MODULE_DIR/system" "$MODPATH/system"
   if [ $? -eq 0 ]; then
     ui_print "- Current theme preserved successfully"
@@ -250,30 +217,57 @@ if [ -d "$OLD_MODULE_DIR/system" ]; then
     ui_print "! Failed to preserve theme, update cancelled"
     abort "*********************************************"
   fi
+  ui_print "*********************************************"
 fi
 
-# Auto-detect directory
-detect_boot_dir
+# Auto-detect boot animation directory from module structure
+module_boot_dir=""
+
+# Search for bootanimation.zip in module's system directory
+if [ -f "$MODPATH/system/product/media/bootanimation.zip" ]; then
+  module_boot_dir="/product/media"
+elif [ -f "$MODPATH/system/media/bootanimation.zip" ]; then
+  module_boot_dir="/system/media"
+elif [ -f "$MODPATH/system_ext/media/bootanimation.zip" ]; then
+  module_boot_dir="/system_ext/media"
+fi
+
+if [ -n "$module_boot_dir" ]; then
+  # Module has a pre-configured path from build
+  BOOT_DIR="$module_boot_dir"
+  BOOT_DIR_FROM_MODULE=true
+else
+  # Fallback, detect from device's existing bootanimation (edge case)
+  BOOT_DIR_FROM_MODULE=false
+  if [ -f "/product/media/bootanimation.zip" ]; then
+    BOOT_DIR="/product/media"
+  elif [ -f "/system/media/bootanimation.zip" ]; then
+    BOOT_DIR="/system/media"
+  elif [ -f "/system_ext/media/bootanimation.zip" ]; then
+    BOOT_DIR="/system_ext/media"
+  else
+    BOOT_DIR="/product/media"
+  fi
+fi
 
 if [ "$BOOT_DIR_FROM_MODULE" = true ]; then
-  ui_print "- Boot animation path (from module): $BOOT_DIR"
-  ui_print "- Change directory? (Not recommended)"
-  ui_print "  Volume [+]: Change directory"
-  ui_print "  Volume [-]: Use module path (Default)"
+  ui_print "- Module has a pre-configured path from build"
+  ui_print "- Path (from module): $BOOT_DIR"
+  ui_print "- Skipping path select user dialog"
 else
-  ui_print "- Detected boot animation directory: $BOOT_DIR"
-  ui_print "- (May not match module's configured path, please verify before proceeding)"
-  ui_print "- Do you want to change the directory?"
-  ui_print "  Volume [+]: Change directory"
+  ui_print "- Detected path: $BOOT_DIR"
+  ui_print "- (May not match actual device path, please verify before proceeding)"
+  ui_print "- Do you want to change the path?"
+  ui_print "  Volume [+]: Change path"
   ui_print "  Volume [-]: Use detected path"
+  key_check
+  if [[ "$keycheck" == "KEY_VOLUMEUP" ]]; then
+    select_boot_dir
+  else
+    ui_print "- Using: $BOOT_DIR"
+  fi
 fi
 ui_print "*********************************************"
-key_check
-if [[ "$keycheck" == "KEY_VOLUMEUP" ]]; then
-  select_boot_dir
-else
-  ui_print "- Using: $BOOT_DIR"
-fi
 
 # Create backup if not found or empty
 backup_exists=false
@@ -290,7 +284,7 @@ fi
 if [ "$backup_exists" = false ]; then
   ui_print "- Do you want to backup your current boot animation?"
   ui_print "  Press the following keys to proceed:"
-  ui_print "  Volume [+]: Backup (Recommended)"
+  ui_print "  Volume [+]: Backup (Highly recommended)"
   ui_print "  Volume [-]: Skip"
   ui_print "*********************************************"
   key_check
@@ -314,7 +308,7 @@ ui_print "- Reboot to see new animations"
 ui_print ""
 ui_print "! If you don't see any changes after reboot:"
 ui_print "  You may have selected the wrong path"
-ui_print "  Try reinstalling and select a different directory"
+ui_print "  Try reinstalling after selecting the correct one"
 ui_print "*********************************************"
 
 # End
