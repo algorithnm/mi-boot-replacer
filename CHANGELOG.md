@@ -1,3 +1,5 @@
-## v1.1.8
+## v1.2.0 - Final
 
-- Fixed a format bug where KernelSU-based managers wouldn't recognize the module
+- Changed existing update behaviour to skip instead of asking the user
+- Finalized the module
+- This is the **final version**. Future updates will be minimal and limited to bug fixes only.

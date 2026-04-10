@@ -1,9 +1,9 @@
 name: Build Custom Module
 
+# To run this workflow
 # 1. Fork this repo
-# 2. Choose a device template OR add custom bootanimation.zip files to the 'upload' folder
-# 3. Run this workflow manually
-# 4. Download the module
+# 2. Choose a device template or add custom files to the 'upload' folder
+# 3. Run and download the module
 
 run-name: "Build: ${{ inputs.source == 'template' && format('{0}/{1}', inputs.device, inputs.theme) || 'upload' }} > ${{ inputs.target_location }}"
 

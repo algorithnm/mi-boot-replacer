@@ -1,8 +1,8 @@
 # Xiaomi Custom Boot Animation
-English | [简体中文](/README_zh-CN.md)
+English | [简体中文](/docs/README_zh-CN.md) | [繁體中文](/docs/README_zh-HK.md)
 
 ## Introduction
-A simple module that replaces boot animations with custom ones and works on almost every Xiaomi device. This module is also compatible with tablets since, in contrast to phones, tablets frequently modify their animations according to the orientation of the device.
+A simple module that replaces boot animations with custom ones and works on almost every Xiaomi device. Probably can save you some time to build or troubleshoot. This module is also compatible with tablets since, in contrast to phones, tablets frequently modify their animations according to the orientation of the device.
 
 This module utilizes systemless mount to mount the files, ensuring no modifications are made to the system partition.
 
@@ -189,9 +189,6 @@ This module utilizes systemless mount to mount the files, ensuring no modificati
 
 </details>
 
-> [!NOTE]
-> This module should work on other models, brands, and systems, but further testing is needed. Feel free to report your results!
-
 ## Installation
 
 > [!CAUTION]
@@ -201,9 +198,6 @@ This module utilizes systemless mount to mount the files, ensuring no modificati
 2. Download the built module from Artifacts
 3. Flash the downloaded ZIP directly
 4. Reboot
-
-> [!TIP]
-> Flash the downloaded artifact directly - no extraction needed! The workflow creates properly formatted module packages ready to flash.
 
 ## Backup and Restore
 
@@ -325,6 +319,10 @@ p 0 5 part0
 
 ## Disclaimer
 **A bootloop saver module is strongly advised even if there is little possibility that flashing this module would cause your device to bootloop. I am not responsible for any damages caused to your device or data by using this module. Use at your own risk.**
+
+## Credits
+- [Magisk](https://github.com/topjohnwu/Magisk)
+- [sothx](https://github.com/sothx) - Key selector
 
 ## License
     This program is free software: you can redistribute it and/or modify
