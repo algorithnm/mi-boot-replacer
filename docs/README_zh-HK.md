@@ -1,5 +1,5 @@
 # 小米自訂開機動畫
-[English](/README.md) | [简体中文](/README_zh-CN.md) | 繁體中文
+[English](/docs/README.md) | [简体中文](/docs/README_zh-CN.md) | 繁體中文
 
 文檔最後更新：16/03/2026
 
@@ -190,9 +190,6 @@
 | courbet | 小米11 Lite 4G |
 
 </details>
-
-> [!NOTE]
-> 此模組應該可以在其他型號、品牌和系統上運行，但仍需進一步測試。歡迎反饋您的測試結果！
 
 ## 安裝
 

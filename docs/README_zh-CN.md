@@ -1,5 +1,5 @@
 # 小米自定义开机动画
-[English](/README.md) | 简体中文 | [繁體中文](/README_zh-HK.md)
+[English](/docs/README.md) | 简体中文 | [繁體中文](/docs/README_zh-HK.md)
 
 文档最后更新：12/03/2026
 
@@ -190,9 +190,6 @@
 | courbet | 小米11 Lite 4G |
 
 </details>
-
-> [!NOTE]
-> 此模块应该可以在其他型号、品牌和系统上运行，但仍需进一步测试。欢迎反馈您的测试结果！
 
 ## 安装
 

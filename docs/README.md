@@ -1,5 +1,5 @@
 # Xiaomi Custom Boot Animation
-English | [简体中文](/README_zh-CN.md) | [繁體中文](/README_zh-HK.md)
+English | [简体中文](/docs/README_zh-CN.md) | [繁體中文](/docs/README_zh-HK.md)
 
 ## Introduction
 A simple module that replaces boot animations with custom ones and works on almost every Xiaomi device. Probably can save you some time to build or troubleshoot. This module is also compatible with tablets since, in contrast to phones, tablets frequently modify their animations according to the orientation of the device.
@@ -188,9 +188,6 @@ This module utilizes systemless mount to mount the files, ensuring no modificati
 | courbet | Xiaomi 11 Lite 4G |
 
 </details>
-
-> [!NOTE]
-> This module should work on other models, brands, and systems, but further testing is needed. Feel free to report your results!
 
 ## Installation
 
