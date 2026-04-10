@@ -71,7 +71,7 @@ jobs:
 
           # Create artifact name with commit hash and timestamp
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-          ARTIFACT_NAME="${MODULE_ID}-test-${COMMIT_SHORT}-${TIMESTAMP}"
+          ARTIFACT_NAME="${MODULE_ID}-${COMMIT_SHORT}-${TIMESTAMP}"
 
           echo "artifact_name=$ARTIFACT_NAME" >> $GITHUB_OUTPUT
           echo "commit_short=$COMMIT_SHORT" >> $GITHUB_OUTPUT
